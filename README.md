@@ -9,6 +9,7 @@
 - step3: stencil-store (sessionStorageを使用しreloadしても再現)
 - use-stencil: step3をWeb Componentとして利用
 
+
 ## Size
 
 |       | Disk |    Js |
@@ -18,9 +19,7 @@
 | step1 |  16M | 11.3k |
 | step2 |  16M | 12.6k |
 | step3 |  16M | 11.7k |
-| use-stencil |  16M | 19.9k |
+| use-stencil |  54M | 19.9k(webpack) 17.1k(rollup) |
 
 
-## use-stencil on GitHub Pages
-
-[use-stencil](https://shingo1551.github.io/TicTocToe/)
+## [use-stencil on GitHub Pages](https://shingo1551.github.io/TicTocToe/)
