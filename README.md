@@ -14,12 +14,12 @@
 
 |       | Disk |    Js |
 |:------|-----:|------:|
-| react | 244M |  270k |
-| hooks | 302M |  269k |
+| react | 265M |  136k |
+| hooks | 329M |  136k |
 | step1 |  16M | 11.3k |
-| step2 |  16M | 12.6k |
+| step2 |  16M | 12.7k |
 | step3 |  16M | 11.7k |
-| use-stencil |  54M | 19.9k(webpack) 17.1k(rollup) |
+| use-stencil |  42M | 20.4k(webpack) 18.5k(rollup) |
 
 
 ## [use-stencil on GitHub Pages](https://shingo1551.github.io/TicTocToe/)
