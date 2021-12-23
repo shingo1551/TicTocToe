@@ -2,6 +2,8 @@ import React from 'react';
 import './Game.css';
 
 function Square(props) {
+  console.log('Square');
+
   return (
     <button className="square" onClick={props.onClick}>
       {props.value}
@@ -10,6 +12,10 @@ function Square(props) {
 }
 
 class Board extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+  }
+
   renderSquare(i) {
     return (
       <Square
@@ -20,6 +26,8 @@ class Board extends React.Component {
   }
 
   render() {
+    console.log('Board');
+
     return (
       <div>
         <div className="board-row">
@@ -83,6 +91,8 @@ class Game extends React.Component {
   }
 
   render() {
+    console.log('Game');
+
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
