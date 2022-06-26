@@ -1,9 +1,10 @@
-# from React to Stencil
+# from React to Stencil or Fresh
 
 [TicTacToe](https://reactjs.org/tutorial/tutorial.html)をReactとStencilで作る
 
 - react: React版
 - hooks: React(Hooks)版
+- fresh: Fresh版
 - step1: React風
 - step2: Stencil版
 - step3: stencil-store (sessionStorageを使用しreloadしても再現)
