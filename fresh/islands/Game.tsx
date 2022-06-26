@@ -1,20 +1,27 @@
 /** @jsx h */
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
-import Square from '../components/Square.tsx';
+import { useEffect, useRef, Ref } from 'preact/hooks';
+
+import Board from '../components/Board.tsx';
+import { MoveEvent } from '../components/Square.tsx';
 
 export default function Home() {
-  function onMove(e: any) {
-    console.log(e);
+  const game = useRef(null) as Ref<HTMLDivElement>;
+
+  const labels = ['O', 'X', '', '', '', '', '', '', ''];
+
+  function handleMove(e: Event) {
+    console.log((e as MoveEvent).detail);
   }
+
   useEffect(() => {
-    const game = document.querySelector('.game');
-    game?.addEventListener('move', onMove);
-    return window.removeEventListener('move', onMove);
+    game.current?.addEventListener('move', handleMove);
+    return () => game.current?.removeEventListener('move', handleMove);
   }, []);
+
   return (
-    <div class='game'>
-      <Square label={'X'} index={1} />
+    <div class='game' ref={game}>
+      <Board labels={labels} />
     </div>
   );
 }
