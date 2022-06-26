@@ -8,6 +8,8 @@ import Counter from '../islands/Counter.tsx';
 import Game from '../islands/Game.tsx';
 
 export default function Home(props: PageProps) {
+  console.log('Home');
+
   return (
     <>
       <Head>
