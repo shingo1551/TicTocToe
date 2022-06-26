@@ -6,7 +6,13 @@ import { MoveEvent } from '../components/Square.tsx';
 
 import { Squares, calculateWinner } from '../utils/game.ts';
 
-export default class Game extends Component {
+interface State {
+  history: Squares[];
+  step: number;
+  xIsNext: boolean;
+}
+
+export default class Game extends Component<{}, State> {
   state = {
     history: [Array(9).fill(null) as Squares],
     step: 0,

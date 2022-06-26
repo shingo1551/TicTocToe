@@ -1,6 +1,5 @@
 /** @jsx h */
-import { h } from 'preact';
-import { IS_BROWSER } from '$fresh/runtime.ts';
+import { h, Component } from 'preact';
 import { emit } from '../utils/helper.ts'
 
 interface Props {
@@ -12,12 +11,20 @@ interface MoveDetail { index: number; }
 
 export type MoveEvent = CustomEvent<MoveDetail>
 
-export default function Suare(props: Props) {
-  // if (IS_BROWSER) console.log('Square', props.index);
+export default class Square extends Component<Props> {
+  shouldComponentUpdate(nextProps: Readonly<Props>) {
+    return nextProps.label != this.props.label;
+  }
 
-  return (
-    <button class='square' onClick={(e) => emit<MoveDetail>('move', e.target, { index: props.index })}>
-      {props.label}
-    </button>
-  );
+  handleClick = (e: Event) => emit<MoveDetail>('move', e.target, { index: this.props.index });
+
+  render() {
+    console.log('Square', this.props.index);
+
+    return (
+      <button class='square' onClick={this.handleClick}>
+        {this.props.label}
+      </button >
+    );
+  }
 }
