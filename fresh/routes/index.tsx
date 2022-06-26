@@ -19,7 +19,6 @@ export default function Home(props: PageProps) {
       </Head>
       <body>
         <Game />
-        <Counter start={3} />
       </body>
     </>
   );

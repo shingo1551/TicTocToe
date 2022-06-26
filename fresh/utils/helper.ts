@@ -5,3 +5,6 @@ export function emit<T>(name: string, target: EventTarget | null, detail: T) {
   });
   target?.dispatchEvent(event);
 }
+
+export interface StepDetail { index: number; }
+export type StepEvent = CustomEvent<StepDetail>

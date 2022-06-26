@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, Component } from 'preact';
+import { Component, h } from 'preact';
 import Square from './Square.tsx';
 
 interface Props {

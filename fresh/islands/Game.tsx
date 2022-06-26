@@ -1,10 +1,12 @@
 /** @jsx h */
-import { h, Component } from 'preact';
+/** @jsxFrag Fragment */
+import { Fragment, Component, h } from 'preact';
 
 import Board from '../components/Board.tsx';
-import { MoveEvent } from '../components/Square.tsx';
+import Info from '../components/Info.tsx';
 
 import { Squares, calculateWinner } from '../utils/game.ts';
+import { StepEvent } from '../utils/helper.ts'
 
 interface State {
   history: Squares[];
@@ -22,16 +24,16 @@ export default class Game extends Component<{}, State> {
   componentDidMount() {
     console.log(this.base);
     this.base?.addEventListener('move', this.handleMove);
+    this.base?.addEventListener('jump', this.handleJump);
   }
 
   componentWillUnmount() {
     this.base?.removeEventListener('move', this.handleMove);
+    this.base?.removeEventListener('jump', this.handleJump);
   }
 
   handleMove = (e: Event) => {
-    console.log((e as MoveEvent).detail);
-    const i = (e as MoveEvent).detail.index;
-
+    const i = (e as StepEvent).detail.index;
     const state = this.state;
 
     const h = state.history.slice(0, state.step + 1);
@@ -48,6 +50,14 @@ export default class Game extends Component<{}, State> {
     });
   }
 
+  handleJump = (e: Event) => {
+    const i = (e as StepEvent).detail.index;
+    this.setState({
+      step: i,
+      xIsNext: i % 2 === 0
+    });
+  };
+
   render() {
     console.log('Game');
 
@@ -55,6 +65,9 @@ export default class Game extends Component<{}, State> {
     const current = state.history[state.step];
     const winner = calculateWinner(current);
 
-    return <Board squares={current} />
+    return <>
+      <Board squares={current} />
+      <Info history={state.history} step={state.step} status={winner} />
+    </>
   }
 }
