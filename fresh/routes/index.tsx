@@ -4,7 +4,6 @@ import { Fragment, h } from 'preact';
 import { Head, asset } from "$fresh/runtime.ts";
 import { PageProps } from "$fresh/server.ts";
 
-import Counter from '../islands/Counter.tsx';
 import Game from '../islands/Game.tsx';
 
 export default function Home(props: PageProps) {

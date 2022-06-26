@@ -22,7 +22,6 @@ export default class Game extends Component<{}, State> {
   }
 
   componentDidMount() {
-    console.log(this.base);
     this.base?.addEventListener('move', this.handleMove);
     this.base?.addEventListener('jump', this.handleJump);
   }
