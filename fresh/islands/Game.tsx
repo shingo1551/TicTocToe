@@ -64,10 +64,12 @@ export default class Game extends Component<{}, State> {
     const state = this.state;
     const current = state.history[state.step];
     const winner = calculateWinner(current);
+    const status = winner ? "Winner: " + winner : "Next player: " + (this.state.xIsNext ? "X" : "O");
 
-    return <>
-      <Board squares={current} />
-      <Info history={state.history} step={state.step} status={winner} />
-    </>
+    return (
+      <div class="game">
+        <Board squares={current} />
+        <Info history={state.history} step={state.step} status={status} />
+      </div>);
   }
 }
