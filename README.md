@@ -25,3 +25,4 @@
 
 
 ## [use-stencil on GitHub Pages](https://shingo1551.github.io/TicTocToe/)
+## [Fresh on Deno Deploy](https://tictoctoe.deno.dev/)
