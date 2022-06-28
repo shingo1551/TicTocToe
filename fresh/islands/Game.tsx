@@ -1,6 +1,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, Component, h } from 'preact';
+import { Component, h } from 'preact';
 
 import Board from '../components/Board.tsx';
 import Info from '../components/Info.tsx';
