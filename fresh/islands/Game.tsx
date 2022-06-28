@@ -8,13 +8,7 @@ import Info from '../components/Info.tsx';
 import { Squares, calculateWinner } from '../utils/game.ts';
 import { StepEvent } from '../utils/helper.ts'
 
-interface State {
-  history: Squares[];
-  step: number;
-  xIsNext: boolean;
-}
-
-export default class Game extends Component<{}, State> {
+export default class Game extends Component {
   state = {
     history: [Array(9).fill(null) as Squares],
     step: 0,
