@@ -14,7 +14,7 @@ export default function Home(props: PageProps) {
       <Head>
         <title>TicTocToe</title>
         <meta name="description" content='TicTocToe by FRESH' />
-        <link href={asset('game.css')} rel="stylesheet" />
+        <link href="/game.css" rel="stylesheet" />
       </Head>
       <body>
         <h3><a href="https://github.com/shingo1551/TicTocToe">from React to Fresh</a></h3>
