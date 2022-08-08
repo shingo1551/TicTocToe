@@ -57,7 +57,7 @@ export default class Game extends Component {
     const state = this.state;
     const current = state.history[state.step];
     const winner = calculateWinner(current);
-    const status = winner ? "Winner: " + winner : "Next player: " + (this.state.xIsNext ? "X" : "O");
+    const status = winner ? "Winner: " + winner : "Next player: " + (state.xIsNext ? "X" : "O");
 
     return (
       <div class="game">

@@ -16,8 +16,7 @@ export default class Info extends Component<Props> {
   render() {
     console.log('info');
 
-    const state = this.props;
-    const steps = state.history.map((_, step) => {
+    const steps = this.props.history.map((_, step) => {
       const desc = step ? 'Go to step #' + step : 'Go to game start';
       return (
         <li key={step}>
@@ -28,7 +27,7 @@ export default class Info extends Component<Props> {
 
     return (
       <div class="game-info">
-        <div>{state.status}</div>
+        <div>{this.props.status}</div>
         <ol>{steps}</ol>
       </div>
     );

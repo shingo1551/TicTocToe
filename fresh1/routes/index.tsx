@@ -1,20 +1,25 @@
 /** @jsx h */
-import { h } from "preact";
-import Counter from "../islands/Counter.tsx";
+/** @jsxFrag Fragment */
+import { Fragment, h } from 'preact';
+import { Head } from "$fresh/runtime.ts";
+import { PageProps } from "$fresh/server.ts";
 
-export default function Home() {
+import Game from '../islands/Game.tsx';
+
+export default function Home(props: PageProps) {
+  console.log('Home');
+
   return (
-    <div>
-      <img
-        src="/logo.svg"
-        height="100px"
-        alt="the fresh logo: a sliced lemon dripping with juice"
-      />
-      <p>
-        Welcome to `fresh`. Try updating this message in the ./routes/index.tsx
-        file, and refresh.
-      </p>
-      <Counter start={3} />
-    </div>
+    <>
+      <Head>
+        <title>TicTocToe</title>
+        <meta name="description" content='TicTocToe by FRESH' />
+        <link href="/game.css" rel="stylesheet" />
+      </Head>
+      <body>
+        <h3><a href="https://github.com/shingo1551/TicTocToe">from React to Fresh</a></h3>
+        <Game />
+      </body>
+    </>
   );
 }
