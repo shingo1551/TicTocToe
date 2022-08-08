@@ -1,84 +1,35 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h } from 'preact';
-import { useContext } from "preact/hooks";
+import { useState } from "preact/hooks";
 
 import Board from '../components/Board.tsx';
 import Info from '../components/Info.tsx';
 
-import { context, calculateWinner } from '../utils/game.ts';
+import { Squares, state, setter, calculateWinner } from '../utils/game.ts';
 
 export default function Game() {
   console.log('Game');
 
-  const state = useContext(context);
+  const [history, setHistory] = useState([Array(9).fill(null) as Squares]);
+  const [step, setStep] = useState(0);
+  const [xIsNext, setNext] = useState(true);
 
-  const current = state.history[state.step];
+  state.history = history;
+  state.step = step;
+  state.xIsNext = xIsNext;
+
+  setter.history = setHistory;
+  setter.step = setStep;
+  setter.xIsNext = setNext;
+
+  const current = history[step];
   const winner = calculateWinner(current);
-  const status = winner ? "Winner: " + winner : "Next player: " + (state.xIsNext ? "X" : "O");
+  const status = winner ? "Winner: " + winner : "Next player: " + (xIsNext ? "X" : "O");
 
   return (
     <div class="game">
       <Board squares={current} />
-      <Info history={state.history} step={state.step} status={status} />
+      <Info history={history} step={step} status={status} />
     </div>);
 }
-
-// export default class Game extends Component {
-//   state = {
-//     history: [Array(9).fill(null) as Squares],
-//     step: 0,
-//     xIsNext: true
-//   }
-
-//   componentDidMount() {
-//     this.base?.addEventListener('move', this.handleMove);
-//     this.base?.addEventListener('jump', this.handleJump);
-//   }
-
-//   componentWillUnmount() {
-//     this.base?.removeEventListener('move', this.handleMove);
-//     this.base?.removeEventListener('jump', this.handleJump);
-//   }
-
-//   handleMove = (e: Event) => {
-//     const i = (e as StepEvent).detail.index;
-//     const state = this.state;
-
-//     const h = state.history.slice(0, state.step + 1);
-//     const current = h[h.length - 1];
-//     const squares = current.slice();
-//     if (calculateWinner(squares) || squares[i]) return;
-
-//     squares[i] = state.xIsNext ? 'X' : 'O';
-
-//     this.setState({
-//       history: [...h, squares],
-//       step: h.length,
-//       xIsNext: !state.xIsNext
-//     });
-//   }
-
-//   handleJump = (e: Event) => {
-//     const i = (e as StepEvent).detail.index;
-//     this.setState({
-//       step: i,
-//       xIsNext: i % 2 === 0
-//     });
-//   };
-
-//   render() {
-//     console.log('Game');
-
-//     const state = this.state;
-//     const current = state.history[state.step];
-//     const winner = calculateWinner(current);
-//     const status = winner ? "Winner: " + winner : "Next player: " + (state.xIsNext ? "X" : "O");
-
-//     return (
-//       <div class="game">
-//         <Board squares={current} />
-//         <Info history={state.history} step={state.step} status={status} />
-//       </div>);
-//   }
-// }

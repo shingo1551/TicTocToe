@@ -1,13 +1,23 @@
-import { createContext } from 'preact';
+import { StateUpdater } from "preact/hooks";
 
 export type Squares = string[];
 export type History = Squares[];
 
-export const context = createContext({
-  history: [Array(9).fill(null) as Squares],
-  step: 0,
-  xIsNext: true
-});
+interface State {
+  history: Squares[];
+  step: number;
+  xIsNext: boolean;
+}
+
+export const state = {} as State;
+
+interface Setter {
+  history?: StateUpdater<Squares[]>;
+  step?: StateUpdater<number>;
+  xIsNext?: StateUpdater<boolean>;
+}
+
+export const setter: Setter = {};
 
 export function calculateWinner(squares: Squares) {
   const lines = [
@@ -28,4 +38,22 @@ export function calculateWinner(squares: Squares) {
     }
   }
   return null;
+}
+
+export function move(index: number) {
+  const h = state.history.slice(0, state.step + 1);
+  const current = h[h.length - 1];
+  const squares = current.slice();
+  if (calculateWinner(squares) || squares[index]) return;
+
+  squares[index] = state.xIsNext ? 'X' : 'O';
+
+  setter.history!([...h, squares]);
+  setter.step!(h.length);
+  setter.xIsNext!(!state.xIsNext);
+}
+
+export function jump(index: number) {
+  setter.step!(index);
+  setter.xIsNext!(index % 2 === 0);
 }
