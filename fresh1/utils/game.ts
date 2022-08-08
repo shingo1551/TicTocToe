@@ -12,12 +12,12 @@ interface State {
 export const state = {} as State;
 
 interface Setter {
-  history?: StateUpdater<Squares[]>;
-  step?: StateUpdater<number>;
-  xIsNext?: StateUpdater<boolean>;
+  history: StateUpdater<Squares[]>;
+  step: StateUpdater<number>;
+  xIsNext: StateUpdater<boolean>;
 }
 
-export const setter: Setter = {};
+export const setter = {} as Setter;
 
 export function calculateWinner(squares: Squares) {
   const lines = [
@@ -48,12 +48,12 @@ export function move(index: number) {
 
   squares[index] = state.xIsNext ? 'X' : 'O';
 
-  setter.history!([...h, squares]);
-  setter.step!(h.length);
-  setter.xIsNext!(!state.xIsNext);
+  setter.history([...h, squares]);
+  setter.step(h.length);
+  setter.xIsNext(!state.xIsNext);
 }
 
 export function jump(index: number) {
-  setter.step!(index);
-  setter.xIsNext!(index % 2 === 0);
+  setter.step(index);
+  setter.xIsNext(index % 2 === 0);
 }
