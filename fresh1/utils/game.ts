@@ -1,5 +1,13 @@
+import { createContext } from 'preact';
+
 export type Squares = string[];
 export type History = Squares[];
+
+export const context = createContext({
+  history: [Array(9).fill(null) as Squares],
+  step: 0,
+  xIsNext: true
+});
 
 export function calculateWinner(squares: Squares) {
   const lines = [

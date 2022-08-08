@@ -1,20 +1,17 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h } from 'preact';
+import { useContext } from "preact/hooks";
 
 import Board from '../components/Board.tsx';
 import Info from '../components/Info.tsx';
 
-import { Squares, calculateWinner } from '../utils/game.ts';
+import { context, calculateWinner } from '../utils/game.ts';
 
 export default function Game() {
   console.log('Game');
 
-  const state = {
-    history: [Array(9).fill(null) as Squares],
-    step: 0,
-    xIsNext: true
-  }
+  const state = useContext(context);
 
   const current = state.history[state.step];
   const winner = calculateWinner(current);
