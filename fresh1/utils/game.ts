@@ -1,4 +1,4 @@
-import { StateUpdater } from "preact/hooks";
+import { signal } from "@preact/signals";
 
 export type Squares = string[];
 export type History = Squares[];
@@ -9,15 +9,11 @@ interface State {
   xIsNext: boolean;
 }
 
-export const state = {} as State;
-
-interface Setter {
-  history: StateUpdater<Squares[]>;
-  step: StateUpdater<number>;
-  xIsNext: StateUpdater<boolean>;
-}
-
-export const setter = {} as Setter;
+export const state = signal<State>({
+  history: [Array(9).fill(null)],
+  step: 0,
+  xIsNext: true
+});
 
 export function calculateWinner(squares: Squares) {
   const lines = [
@@ -41,19 +37,26 @@ export function calculateWinner(squares: Squares) {
 }
 
 export function move(index: number) {
-  const h = state.history.slice(0, state.step + 1);
+  const value = state.value;
+
+  const h = value.history.slice(0, value.step + 1);
   const current = h[h.length - 1];
   const squares = current.slice();
   if (calculateWinner(squares) || squares[index]) return;
 
-  squares[index] = state.xIsNext ? 'X' : 'O';
+  squares[index] = value.xIsNext ? 'X' : 'O';
 
-  setter.history([...h, squares]);
-  setter.step(h.length);
-  setter.xIsNext(!state.xIsNext);
+  state.value = {
+    history: [...h, squares],
+    step: h.length,
+    xIsNext: !value.xIsNext
+  };
 }
 
 export function jump(index: number) {
-  setter.step(index);
-  setter.xIsNext(index % 2 === 0);
+  state.value = {
+    history: state.value.history,
+    step: index,
+    xIsNext: index % 2 === 0
+  }
 }

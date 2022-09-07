@@ -4,7 +4,8 @@
 
 - react: React版
 - hooks: React(Hooks)版
-- fresh: Fresh版
+- fresh1: Fresh(signal)版
+- fresh2: Fresh(Component & CustomEvent)版
 - step1: React風
 - step2: Stencil版
 - step3: stencil-store (sessionStorageを使用しreloadしても再現)
@@ -17,7 +18,7 @@
 |:------|-----:|------:|
 | react | 265M |  136k |
 | hooks | 329M |  136k |
-| fresh1 |  1M | 14.2k |
+| fresh1 |  1M | 17.3k |
 | fresh2 |  1M | 13.4k |
 | step1 |  16M | 11.3k |
 | step2 |  16M | 12.7k |
