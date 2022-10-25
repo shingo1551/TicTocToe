@@ -4,6 +4,7 @@
 
 - react: React版
 - hooks: React(Hooks)版
+- preact: Preact(Hooks)版
 - fresh1: Fresh(signal)版
 - fresh2: Fresh(Component & CustomEvent)版
 - step1: React風
