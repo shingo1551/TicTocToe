@@ -10,4 +10,6 @@ export class InfoComponent {
 
   constructor(public game: GameService) { }
 
+  getDesc = (step: number) =>
+    step ? 'Go to step #' + step : 'Go to game start';
 }

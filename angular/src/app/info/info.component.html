@@ -1,4 +1,8 @@
 <div class="game-info">
   <div>{{game.status}}</div>
-  <!-- <ol>{steps}</ol> -->
+  <ol>
+    <li *ngFor="let history of game.history; index as step">
+      <button (click)="game.changeStep(step)">{{getDesc(step)}}</button>
+    </li>
+  </ol>
 </div>

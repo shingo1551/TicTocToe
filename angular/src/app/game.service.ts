@@ -20,6 +20,7 @@ export class GameService {
   changeStep = (value: number) => {
     const state = this;
 
+    state.step = value;
     state.xIsNext = value % 2 === 0;
     state.squares = state.history[value];
     state.winner = this.calculateWinner(state.squares);
