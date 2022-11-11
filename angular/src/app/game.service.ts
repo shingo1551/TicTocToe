@@ -15,34 +15,32 @@ export class GameService {
     this.history = [Array(9).fill(null)];
     this.squares = this.history[0];
     this.winner = null;
+
+    this.loadStorage();
   }
 
   changeStep = (value: number) => {
-    const state = this;
-
-    state.step = value;
-    state.xIsNext = value % 2 === 0;
-    state.squares = state.history[value];
-    state.winner = this.calculateWinner(state.squares);
-    state.status = state.winner ? 'Winner: ' + state.winner : 'Next player: ' + (state.xIsNext ? 'X' : 'O');
+    this.step = value;
+    this.xIsNext = value % 2 === 0;
+    this.squares = this.history[value];
+    this.winner = this.calculateWinner(this.squares);
+    this.status = this.winner ? 'Winner: ' + this.winner : 'Next player: ' + (this.xIsNext ? 'X' : 'O');
 
     this.saveStorage();
   }
 
   //
   move = (i: number) => {
-    const state = this;
-
-    const history = state.history.slice(0, state.step + 1);
+    const history = this.history.slice(0, this.step + 1);
     const current = history[history.length - 1];
     const squares = current.slice();
     if (this.calculateWinner(squares) || squares[i]) return;
 
-    squares[i] = state.xIsNext ? 'X' : 'O';
-    state.history = [...history, squares];
-    state.step = history.length;
+    squares[i] = this.xIsNext ? 'X' : 'O';
+    this.history = [...history, squares];
+    this.step = history.length;
 
-    this.changeStep(state.step);
+    this.changeStep(this.step);
   }
 
   calculateWinner = (squares: string[]) => {
@@ -68,22 +66,18 @@ export class GameService {
 
   //
   loadStorage = () => {
-    const state = this;
-
     const str = sessionStorage.getItem('game');
     if (str) {
       const game = JSON.parse(str);
-      state.history = game.history;
-      state.step = game.step;
+      this.history = game.history;
+      this.step = game.step;
     }
   }
 
   saveStorage() {
-    const state = this;
-
     const game = {
-      history: state.history,
-      step: state.step,
+      history: this.history,
+      step: this.step,
     };
     sessionStorage.setItem('game', JSON.stringify(game));
   }
