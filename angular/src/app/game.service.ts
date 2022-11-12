@@ -9,7 +9,7 @@ export class GameService {
   xIsNext = true;
   squares: string[];
   winner: string | null;
-  status = '';
+  status = 'Next player: X';
 
   constructor() {
     this.history = [Array(9).fill(null)];
@@ -70,7 +70,7 @@ export class GameService {
     if (str) {
       const game = JSON.parse(str);
       this.history = game.history;
-      this.step = game.step;
+      this.changeStep(game.step);
     }
   }
 
